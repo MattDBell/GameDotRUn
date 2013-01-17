@@ -1,0 +1,10 @@
+*.png
+*.exe
+*.log
+*.zip
+*.sdf
+*.suo
+*.vcxproj.users
+trunk/Game/GameDotRun/ipch/
+trunk/Game/GameDotRun/Debug/
+trunk/Game/GameDotRun/Release/
