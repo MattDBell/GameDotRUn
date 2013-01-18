@@ -67,8 +67,8 @@ void GraphicsComponent::Draw(sf::Vector2<float> camPosition, sf::RenderWindow* w
 	}
 	if(!drawThisFrame)
 		return;
-	sf::Sprite * drawing = currAnimation->frames[currFrame].toDraw;
-	drawing->setPosition(position.x - camPosition.x, position.y - camPosition.y);
-	window->draw(*drawing);
+	sf::Sprite & drawing = currAnimation->frames[currFrame].toDraw;
+	drawing.setPosition(position.x - camPosition.x, position.y - camPosition.y);
+	window->draw(drawing);
 	drawThisFrame = false;
 }

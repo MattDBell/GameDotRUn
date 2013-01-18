@@ -11,8 +11,11 @@
 #define RENDERER_H
 #include <SFML/Graphics.hpp>
 #include <stdint.h>
+#include <map>
 class GraphicsComponent; //Almost want to include this but, may as well avoid pollution
 class Input;
+
+typedef bool (*keycomp)(const char *, const char *);
 
 class Renderer
 {
@@ -22,11 +25,12 @@ class Renderer
 	GraphicsComponent * components;
 	uint32_t numComps;
 	uint32_t lastActive;
+	std::map<const char *, sf::Texture, keycomp> textures; 
 public:
 	static void initialize(int width, int height);
 	static Renderer * Get();
 	bool IsOpen();
-	sf::Sprite * LoadSprite(const char * filename);
+	sf::Texture* GetTexture(const char * filename);
 	GraphicsComponent * Create(char * fileName);
 	void Draw();
 	friend class Input;

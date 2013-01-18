@@ -18,7 +18,7 @@ public:
 	struct AnimFrame
 	{
 		float time;
-		sf::Sprite * toDraw;
+		sf::Sprite toDraw;
 	};
 	struct Animation
 	{

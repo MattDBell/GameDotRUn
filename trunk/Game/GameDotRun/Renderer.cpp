@@ -3,6 +3,10 @@
 #include "tinyxml2.h"
 Renderer * Renderer::renderer = 0;
 
+bool mapLess(const char * a, const char * b)
+{
+	return std::strcmp(a, b) < 0;
+}
 Renderer * Renderer::Get()
 {
 	return renderer;
@@ -16,12 +20,12 @@ bool Renderer::IsOpen()
 {
 	return window.isOpen();
 }
-sf::Sprite * Renderer::LoadSprite(const char * filename)
+sf::Texture * Renderer::GetTexture(const char * filename)
 {
-	sf::Texture temp;
-	temp.loadFromFile(filename);
-	return new sf::Sprite(temp);
-
+	if(textures.count(filename))
+		return &textures[filename];
+	textures[filename].loadFromFile(filename);
+	return &textures[filename];
 }
 GraphicsComponent * Renderer::Create(char * fileName)
 {
@@ -47,13 +51,13 @@ GraphicsComponent * Renderer::Create(char * fileName)
 		while(frame)
 		{
 			comp->anims[index].frames[frameIndex].time = frame->FloatAttribute("time");
-			comp->anims[index].frames[frameIndex].toDraw = LoadSprite(frame->Attribute("toDraw"));
+			comp->anims[index].frames[frameIndex].toDraw.setTexture(*GetTexture(frame->Attribute("image")));
 			frame = frame->NextSiblingElement("Frame");
 		}
 		curr = curr->NextSiblingElement("Animation");
 	}
 	
-	return 0; //FAILEDEDEDED
+	return comp;
 }
 void Renderer::Draw()
 {
@@ -62,5 +66,7 @@ void Renderer::Draw()
 	window.display();
 }
 Renderer::Renderer(int width, int height)
-	: window(sf::VideoMode(width, height), "SFML Works!")
-{}
+	: window(sf::VideoMode(width, height), "SFML Works!"), textures(mapLess)
+{
+	
+}
