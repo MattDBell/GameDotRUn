@@ -3,6 +3,36 @@
 #include "tinyxml2.h"
 Renderer * Renderer::renderer = 0;
 
+
+
+template<int N>
+struct ConstStr
+{
+	ConstStr (const char * str):str(str){}
+	const char *str;
+	enum { size = N -1};
+};
+
+template<int N>
+const ConstStr<N>& MakeConstStr(const char (&str)[N] )
+{
+	ConstStr<N> *ret = new ConstStr<N>(&str[0]);
+	return *ret;
+}
+
+const auto& textDir = MakeConstStr("Assets/");
+
+//static const char * textDir = "Assets/";
+
+char* GetDir(const char * dir)
+{
+	int fileNameSize =strlen(dir);
+	char * actFileName = new char[textDir.size + fileNameSize + 1];
+	memcpy(actFileName, textDir.str, textDir.size);
+	memcpy(&actFileName[textDir.size], dir, fileNameSize +1);
+	return actFileName;
+}
+
 bool mapLess(const char * a, const char * b)
 {
 	return std::strcmp(a, b) < 0;
@@ -20,17 +50,22 @@ bool Renderer::IsOpen()
 {
 	return window.isOpen();
 }
+
 sf::Texture * Renderer::GetTexture(const char * filename)
 {
 	if(textures.count(filename))
 		return &textures[filename];
-	textures[filename].loadFromFile(filename);
+	char * actFileName = GetDir(filename);
+	textures[filename].loadFromFile(actFileName);
+	delete actFileName;
 	return &textures[filename];
 }
 GraphicsComponent * Renderer::Create(char * fileName)
 {
+	char * actDir = GetDir(fileName);
 	tinyxml2::XMLDocument file;
-	file.LoadFile(fileName);
+	file.LoadFile(actDir);
+	delete actDir;
 	
 	tinyxml2::XMLElement * curr = file.FirstChildElement("Animation");
 	uint32_t count = 0;

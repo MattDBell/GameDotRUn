@@ -51,6 +51,9 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationLayer.h">
@@ -81,6 +84,9 @@
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GDRVector2.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

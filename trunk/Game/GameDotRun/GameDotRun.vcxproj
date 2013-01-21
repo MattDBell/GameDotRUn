@@ -86,6 +86,7 @@
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="InGameLevel.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
@@ -100,6 +101,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="GDRVector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,10 +10,14 @@
 #define PLAYER_H
 
 #include "Entity.h"
-#include "Renderer.h"
+#include "Box2D/Box2D.h"
+#include "GDRVector2.h"
+class GraphicsComponent;
 
 class Player: public Entity
 {
+	GDR_Vector2 pos;
+	GraphicsComponent * graphic;
 public:
 	virtual bool Initialize();
 	virtual bool Alive();
