@@ -53,7 +53,7 @@ void GraphicsComponent::Draw(sf::Vector2<float> camPosition, sf::RenderWindow* w
 		{
 			currTime -= frameTime;
 			currFrame++;
-			if(currFrame > currAnimation->numFrames)
+			if(currFrame == currAnimation->numFrames)
 			{
 				if(currAnimation->loop)
 					currFrame = 0;

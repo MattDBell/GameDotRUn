@@ -33,7 +33,7 @@ public:
 	bool IsOpen();
 	sf::Texture* GetTexture(const char * filename);
 	GraphicsComponent * Create(char * fileName);
-	void Draw();
+	void Draw(float deltaTime);
 	friend class Input;
 };
 #endif

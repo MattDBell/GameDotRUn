@@ -19,13 +19,14 @@ void ApplicationLayer::Initialize()
 void ApplicationLayer::Run()
 {
 	quit = false;
-	DWORD last = 0;
+	DWORD last = GetTickCount();
 	Input::Get()->Register(Input::ESC_KEY, Quit);
 	while(!quit)
 	{
 		Input::Get()->GetEvents();
 		DWORD t = GetTickCount();
 		float deltaTime = (t-last)/1000.0f;
+		last = t;
 		//Going to have to figure this out with Input
 		//while(Renderer::PollEvent(evt))		
 		//{										
@@ -36,7 +37,7 @@ void ApplicationLayer::Run()
 		{
 			currentLevel->Step(deltaTime);
 		}
-		Renderer::Get()->Draw();
+		Renderer::Get()->Draw(deltaTime);
 		Sleep(16);
 	}
 }

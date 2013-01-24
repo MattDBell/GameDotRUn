@@ -101,7 +101,7 @@ GraphicsComponent * Renderer::Create(char * fileName)
 		while(frame)
 		{
 			comp->anims[index].frames[frameIndex].time = frame->FloatAttribute("time");
-			comp->anims[index].frames[frameIndex].toDraw.setTexture(*GetTexture(frame->Attribute("image")));
+			comp->anims[index].frames[frameIndex++].toDraw.setTexture(*GetTexture(frame->Attribute("image")));
 			frame = frame->NextSiblingElement("Frame");
 		}
 		curr = curr->NextSiblingElement("Animation");
@@ -109,13 +109,13 @@ GraphicsComponent * Renderer::Create(char * fileName)
 	
 	return comp;
 }
-void Renderer::Draw()
+void Renderer::Draw(float deltaTime)
 {
 	window.clear();
 	//Draw all entities;
 	for(int i = 0; i < lastActive; ++i)
 	{
-		components[i].Draw(sf::Vector2<float>(0,0), &window, 0.1f);
+		components[i].Draw(sf::Vector2<float>(0,0), &window, deltaTime);
 	}
 	window.display();
 }
