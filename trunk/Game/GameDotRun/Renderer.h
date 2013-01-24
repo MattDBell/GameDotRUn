@@ -21,13 +21,14 @@ class Renderer
 {
 	sf::RenderWindow window;
 	static Renderer * renderer;
-	Renderer(int width, int height);
+	Renderer(int width, int height, int numComp = 100);
 	GraphicsComponent * components;
 	uint32_t numComps;
 	uint32_t lastActive;
-	std::map<const char *, sf::Texture, keycomp> textures; 
+	std::map<const char *, sf::Texture, keycomp> textures;
+	void SizeUp();
 public:
-	static void initialize(int width, int height);
+	static void initialize(int width, int height, int numComp = 100);
 	static Renderer * Get();
 	bool IsOpen();
 	sf::Texture* GetTexture(const char * filename);

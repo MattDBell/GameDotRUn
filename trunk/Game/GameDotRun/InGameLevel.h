@@ -10,11 +10,13 @@
 #include "Level.h"
 #include <stdint.h>
 #include "Box2D/Box2D.h"
+#include "Player.h"
 class InGameLevel : public Level
 {
 	b2World* physics; //We may need to abstract this further
 	int32_t velocityIter; 
 	int32_t positionIter;
+	Player * player;
 public:
 	InGameLevel();
 	virtual void Load();

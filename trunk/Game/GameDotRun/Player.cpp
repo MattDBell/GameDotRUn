@@ -20,3 +20,7 @@ bool Player::Update( float deltaTime )
 	graphic->Draw(pos.AsSFML());
 	return true;
 }
+bool Player::Spawn()
+{
+	return true;
+}

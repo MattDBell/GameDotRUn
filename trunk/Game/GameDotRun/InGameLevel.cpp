@@ -16,10 +16,13 @@ void InGameLevel::Load()
 	//------- END LOADING -------
 	
 	physics = new b2World(gravity);
+	player = new Player();
+	player->Initialize();
 }
 void InGameLevel::Step(float deltaTime)
 {
 	physics->Step(deltaTime, velocityIter, positionIter);
+	player->Update(deltaTime);
 }
 void InGameLevel::Cleanup()
 {

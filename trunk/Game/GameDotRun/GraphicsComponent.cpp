@@ -14,6 +14,10 @@ void GraphicsComponent::SetNumAnims(uint32_t numAnims)
 	anims = new Animation[numAnims];
 	memset(anims, 0, sizeof(Animation) * numAnims);
 }
+sf::Sprite* GraphicsComponent::GetSprite()
+{
+	return &currAnimation->frames[currFrame].toDraw;
+}
 void GraphicsComponent::SetAnim(uint32_t slot, Animation &anim)
 {
 	memcpy(&anims[slot], &anim, sizeof(Animation));

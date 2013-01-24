@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include "ApplicationLayer.h"
 #include "Renderer.h"
-
+#include "InGameLevel.h"
 #include <time.h>
 bool ApplicationLayer::quit = false;
 
@@ -12,6 +12,8 @@ ApplicationLayer::ApplicationLayer(int width, int height)
 }
 void ApplicationLayer::Initialize()
 {
+	currentLevel = new InGameLevel();
+	currentLevel->Load();
 	return;
 }
 void ApplicationLayer::Run()
@@ -40,7 +42,7 @@ void ApplicationLayer::Run()
 }
 bool ApplicationLayer::InLevel()
 {
-	return false; //Pretty sure we aren't in a level yet.  AHAHHAAHAHAHAHAH!
+	return currentLevel != 0; //Pretty sure we aren't in a level yet.  AHAHHAAHAHAHAHAH!
 }
 void ApplicationLayer::Quit(Input::InputParams params)
 {

@@ -20,7 +20,7 @@ const ConstStr<N>& MakeConstStr(const char (&str)[N] )
 	return *ret;
 }
 
-const auto& textDir = MakeConstStr("Assets/");
+const auto& textDir = MakeConstStr("Assets\\");
 
 //static const char * textDir = "Assets/";
 
@@ -42,15 +42,24 @@ Renderer * Renderer::Get()
 	return renderer;
 }
 
-void Renderer::initialize(int width, int height)
+void Renderer::initialize(int width, int height, int numComp /* = 100 */ )
 {
-	renderer = new Renderer(width, height);
+	renderer = new Renderer(width, height,numComp);
 }
 bool Renderer::IsOpen()
 {
 	return window.isOpen();
 }
 
+void Renderer::SizeUp()
+{
+	int newSize = (int)(numComps * 1.25f);
+	GraphicsComponent* newComps = new GraphicsComponent[newSize];
+	memcpy(newComps, components, sizeof(GraphicsComponent) * numComps);
+	delete[] components;
+	components = newComps;
+	numComps = newSize;
+}
 sf::Texture * Renderer::GetTexture(const char * filename)
 {
 	if(textures.count(filename))
@@ -71,13 +80,19 @@ GraphicsComponent * Renderer::Create(char * fileName)
 	uint32_t count = 0;
 	for(tinyxml2::XMLElement * child = curr; child; child = child->NextSiblingElement("Animation"))
 		++count;
-	GraphicsComponent* comp = new GraphicsComponent();
+	if(lastActive > numComps)
+		SizeUp();
+	GraphicsComponent* comp = &components[lastActive++];
+	comp->numAnims = count;
 	comp->anims = new GraphicsComponent::Animation[count];
 	uint32_t index = 0;
 	while(curr)
 	{
 		comp->anims[index].numFrames = curr->IntAttribute("numframes");
-		comp->anims[index].name = curr->Attribute("name");
+		const char * n = curr->Attribute("name");
+		
+		comp->anims[index].name = new char[strlen(n) + 1];
+		memcpy((void*)comp->anims[index].name, n, strlen(n) + 1);
 		comp->anims[index].loop = curr->BoolAttribute("loop");
 		comp->anims[index].nextAnim = curr->Attribute("nextanim");
 		comp->anims[index].frames = new GraphicsComponent::AnimFrame[comp->anims[index].numFrames];
@@ -98,10 +113,17 @@ void Renderer::Draw()
 {
 	window.clear();
 	//Draw all entities;
+	for(int i = 0; i < lastActive; ++i)
+	{
+		components[i].Draw(sf::Vector2<float>(0,0), &window, 0.1f);
+	}
 	window.display();
 }
-Renderer::Renderer(int width, int height)
+Renderer::Renderer(int width, int height, int numComp )
 	: window(sf::VideoMode(width, height), "SFML Works!"), textures(mapLess)
 {
+	components = new GraphicsComponent[numComp];
+	this->numComps = numComp;
+	lastActive = 0;
 	
 }
