@@ -18,6 +18,7 @@ class Player: public Entity
 {
 	GDR_Vector2 pos;
 	GraphicsComponent * graphic;
+	b2Body * phys;
 public:
 	virtual bool Initialize();
 	virtual bool Alive();

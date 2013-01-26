@@ -1,26 +1,11 @@
 #include "Renderer.h"
 #include "GraphicsComponent.h"
 #include "tinyxml2.h"
+#include "Hackery.h"
+
 Renderer * Renderer::renderer = 0;
 
-
-
-template<int N>
-struct ConstStr
-{
-	ConstStr (const char * str):str(str){}
-	const char *str;
-	enum { size = N -1};
-};
-
-template<int N>
-const ConstStr<N>& MakeConstStr(const char (&str)[N] )
-{
-	ConstStr<N> *ret = new ConstStr<N>(&str[0]);
-	return *ret;
-}
-
-const auto& textDir = MakeConstStr("Assets\\");
+DelayDest(auto) textDir = MakeConstStr("Assets\\");
 
 //static const char * textDir = "Assets/";
 

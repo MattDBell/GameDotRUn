@@ -89,5 +89,8 @@
     <ClInclude Include="GDRVector2.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hackery.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "InGameLevel.h"
 
+b2World* InGameLevel::physics = 0;
 InGameLevel::InGameLevel()
-	: physics(0)
 {}
 bool InGameLevel::IsLoaded()
 {
@@ -15,6 +15,10 @@ void InGameLevel::Load()
 	positionIter = 2;
 	//------- END LOADING -------
 	
+	if(physics)
+	{
+		delete physics;
+	}
 	physics = new b2World(gravity);
 	player = new Player();
 	player->Initialize();

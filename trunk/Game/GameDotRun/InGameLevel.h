@@ -13,12 +13,13 @@
 #include "Player.h"
 class InGameLevel : public Level
 {
-	b2World* physics; //We may need to abstract this further
+	static b2World* physics; //We may need to abstract this further
 	int32_t velocityIter; 
 	int32_t positionIter;
 	Player * player;
 public:
 	InGameLevel();
+	static b2World* GetPhysicsWorld(){return physics;}
 	virtual void Load();
 	virtual bool IsLoaded();
 	virtual void Step(float deltaTime);

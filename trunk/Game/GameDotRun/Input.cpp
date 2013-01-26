@@ -76,6 +76,6 @@ uint32_t Input::Register(Events evt, InputCallback callBack)
 }
 void Input::Unregister(Events evt, uint32_t handle)
 {
-	DEBUGASSERT((handle >= 0) && (handle < 5), "Debug.log", "Handle not between 0 and 5");
+	DEBUGASSERT((handle >= 0) && (handle < MAX_CALLBACK), "Debug.log", "Handle not between 0 and max callbacks");
 	callbacks[evt][handle] = 0;
 }

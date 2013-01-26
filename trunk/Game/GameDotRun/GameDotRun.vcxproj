@@ -95,6 +95,7 @@
     <ClInclude Include="Debugging.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="Hackery.h" />
     <ClInclude Include="InGameLevel.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Level.h" />

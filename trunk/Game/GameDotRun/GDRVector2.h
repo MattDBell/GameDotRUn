@@ -7,16 +7,13 @@
 class GDR_Vector2
 {
 	b2Vec2 b2v;
-	sf::Vector2<float> sfmlv;
-	float x;
-	float y;
 public:
-	float GetX() {return x;}
-	float GetY() {return y;}
-	void SetX(float to) { x = to; b2v.x = to; sfmlv.x = to;}
-	void SetY(float to) {y = to; b2v.y = to; sfmlv.y = to;}
-	const b2Vec2& AsBox() {return b2v;}
-	const sf::Vector2<float>& AsSFML() {return sfmlv;}
+	float GetX() {return b2v.x;}
+	float GetY() {return b2v.y;}
+	void SetX(float to) {b2v.x = to;}
+	void SetY(float to) {b2v.y = to; }
+	b2Vec2& AsBox() {return b2v;}
+	sf::Vector2<float> AsSFML() {return sf::Vector2<float>(b2v.x, b2v.y);} //This should only be called a la "DelayDest(sf::Vector2<float>) mine = gdr_vec2.AsSFML(); to avoid copying
 
 };
 #endif//GDR_VECTOR2
