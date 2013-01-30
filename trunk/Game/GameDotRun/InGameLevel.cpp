@@ -22,6 +22,8 @@ void InGameLevel::Load()
 	physics = new b2World(gravity);
 	player = new Player();
 	player->Initialize();
+	cam.SetAsCurrent();
+	cam.SetToTrack(player);
 }
 void InGameLevel::Step(float deltaTime)
 {

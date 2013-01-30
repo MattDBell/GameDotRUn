@@ -2,6 +2,7 @@
 #include "GraphicsComponent.h"
 #include "tinyxml2.h"
 #include "Hackery.h"
+#include "Camera.h"
 
 Renderer * Renderer::renderer = 0;
 
@@ -97,10 +98,12 @@ GraphicsComponent * Renderer::Create(char * fileName)
 void Renderer::Draw(float deltaTime)
 {
 	window.clear();
+	Camera::UpdateCurrent(deltaTime);
+	DelayDest(sf::Vector2<float>) camOff = Camera::GetOffset().AsSFML();
 	//Draw all entities;
-	for(int i = 0; i < lastActive; ++i)
+	for(uint32_t i = 0; i < lastActive; ++i)
 	{
-		components[i].Draw(sf::Vector2<float>(0,0), &window, deltaTime);
+		components[i].Draw(camOff, &window, deltaTime);
 	}
 	window.display();
 }

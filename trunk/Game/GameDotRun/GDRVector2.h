@@ -13,7 +13,7 @@ public:
 	void SetX(float to) {b2v.x = to;}
 	void SetY(float to) {b2v.y = to; }
 	b2Vec2& AsBox() {return b2v;}
-	sf::Vector2<float> AsSFML() {return sf::Vector2<float>(b2v.x, b2v.y);} //This should only be called a la "DelayDest(sf::Vector2<float>) mine = gdr_vec2.AsSFML(); to avoid copying
+	sf::Vector2<float> AsSFML() const {return sf::Vector2<float>(b2v.x, b2v.y);} //This should only be called a la "DelayDest(sf::Vector2<float>) mine = gdr_vec2.AsSFML(); to avoid copying
 
 };
 #endif//GDR_VECTOR2

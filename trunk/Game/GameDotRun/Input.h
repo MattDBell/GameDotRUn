@@ -25,7 +25,7 @@ public:
 	};
 	struct KeyEventParams
 	{
-		uint32_t	code	: 20;   
+		uint32_t	evt		: 20;   
 		bool        alt		: 1;    
 		bool        control : 1;
 		bool        shift	: 1;  
@@ -41,6 +41,10 @@ public:
 	enum Events
 	{
 		ESC_KEY,
+		W_KEY,
+		A_KEY,
+		S_KEY,
+		D_KEY,
 		TOTAL_EVENTS,
 		REJECTED
 	};

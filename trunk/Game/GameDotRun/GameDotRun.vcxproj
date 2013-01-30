@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ApplicationLayer.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Debugging.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationLayer.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Debugging.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GraphicsComponent.h" />

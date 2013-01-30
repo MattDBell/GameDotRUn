@@ -12,6 +12,8 @@
 #include "Entity.h"
 #include "Box2D/Box2D.h"
 #include "GDRVector2.h"
+#include "Input.h"
+
 class GraphicsComponent;
 
 class Player: public Entity
@@ -19,10 +21,14 @@ class Player: public Entity
 	GDR_Vector2 pos;
 	GraphicsComponent * graphic;
 	b2Body * phys;
+	static Player * playerOne;
 public:
+	static void InputHandleKeyBoard(Input::InputParams params);
+	static void InputHandleMouse(Input::InputParams params);
 	virtual bool Initialize();
 	virtual bool Alive();
 	virtual bool Spawn();
 	virtual bool Update( float deltaTime );
+	virtual GDR_Vector2 GetPosition() const { return pos;}
 };
 #endif

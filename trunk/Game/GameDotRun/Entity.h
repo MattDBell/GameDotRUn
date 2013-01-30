@@ -7,7 +7,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include <stdint.h>
-
+#include "GDRVector2.h"
 class Entity
 {
 	virtual bool Initialize() = 0;
@@ -15,6 +15,8 @@ class Entity
 	virtual bool Spawn() = 0;
 	virtual bool Update(float deltaTime) = 0;
 public:
+	virtual GDR_Vector2 GetPosition() const =0;
+
 };
 
 typedef Entity * (*Creator)();

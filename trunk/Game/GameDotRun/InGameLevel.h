@@ -11,12 +11,14 @@
 #include <stdint.h>
 #include "Box2D/Box2D.h"
 #include "Player.h"
+#include "Camera.h"
 class InGameLevel : public Level
 {
 	static b2World* physics; //We may need to abstract this further
 	int32_t velocityIter; 
 	int32_t positionIter;
 	Player * player;
+	Camera cam;
 public:
 	InGameLevel();
 	static b2World* GetPhysicsWorld(){return physics;}

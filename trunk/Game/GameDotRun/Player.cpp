@@ -3,6 +3,24 @@
 #include "GraphicsComponent.h"
 #include "Hackery.h"
 #include "InGameLevel.h"
+
+Player * Player::playerOne = 0;
+
+void Player::InputHandleKeyBoard(Input::InputParams params)
+{
+	switch(params.key.evt)
+	{
+	case Input::D_KEY:
+		playerOne->phys->ApplyForceToCenter(b2Vec2(100, 30));
+		break;
+	}
+}
+void Player::InputHandleMouse(Input::InputParams params)
+{
+	
+}
+
+
 bool Player::Initialize()
 {
 	DelayDest(auto) animStart = MakeConstStr("Run");
@@ -29,6 +47,11 @@ bool Player::Initialize()
 	middle.SetAsBox(0.5f, 1.0f);
 	phys->CreateFixture(&middle, 1.0f);
 
+	playerOne = this;
+	Input::Get()->Register(Input::A_KEY, InputHandleKeyBoard);
+	Input::Get()->Register(Input::D_KEY, InputHandleKeyBoard);
+	Input::Get()->Register(Input::S_KEY, InputHandleKeyBoard);
+	Input::Get()->Register(Input::W_KEY, InputHandleKeyBoard);
 	return true;
 }
 bool Player::Alive()

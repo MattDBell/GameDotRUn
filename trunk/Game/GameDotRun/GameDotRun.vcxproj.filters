@@ -54,6 +54,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationLayer.h">
@@ -90,6 +93,9 @@
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hackery.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
