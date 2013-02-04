@@ -7,6 +7,41 @@ Input::Events Translate (sf::Event evt, Input::InputParams & params)
 {
 	if(evt.type == sf::Event::KeyReleased)
 	{
+		params.key.alt = evt.key.alt;
+		params.key.control = evt.key.control;
+		params.key.shift = evt.key.shift;
+		params.key.system = evt.key.system;
+		switch(evt.key.code)
+		{
+		case sf::Keyboard::Escape:
+			{
+				params.key.evt = Input::ESC_KEY_UP;
+				return Input::ESC_KEY_UP;
+			}
+		case sf::Keyboard::W:
+			{
+				params.key.evt = Input::W_KEY_UP;
+				return Input::W_KEY_UP;
+			}
+		case sf::Keyboard::A:
+			{
+				params.key.evt = Input::A_KEY_UP;
+				return Input::A_KEY_UP;
+			}
+		case sf::Keyboard::S:
+			{
+				params.key.evt = Input::S_KEY_UP;
+				return Input::S_KEY_UP;
+			}
+		case sf::Keyboard::D:
+			{
+				params.key.evt = Input::D_KEY_UP;
+				return Input::D_KEY_UP;
+			}
+		}
+	}
+	if(evt.type == sf::Event::KeyPressed)
+	{
 		//params.key.code = evt.key.code;
 		params.key.alt = evt.key.alt;
 		params.key.control = evt.key.control;
@@ -16,28 +51,28 @@ Input::Events Translate (sf::Event evt, Input::InputParams & params)
 		{
 		case sf::Keyboard::Escape:
 			{
-				params.key.evt = Input::ESC_KEY;
-				return Input::ESC_KEY;
+				params.key.evt = Input::ESC_KEY_DOWN;
+				return Input::ESC_KEY_DOWN;
 			}
 		case sf::Keyboard::W:
 			{
-				params.key.evt = Input::W_KEY;
-				return Input::W_KEY;
+				params.key.evt = Input::W_KEY_DOWN;
+				return Input::W_KEY_DOWN;
 			}
 		case sf::Keyboard::A:
 			{
-				params.key.evt = Input::A_KEY;
-				return Input::A_KEY;
+				params.key.evt = Input::A_KEY_DOWN;
+				return Input::A_KEY_DOWN;
 			}
 		case sf::Keyboard::S:
 			{
-				params.key.evt = Input::S_KEY;
-				return Input::S_KEY;
+				params.key.evt = Input::S_KEY_DOWN;
+				return Input::S_KEY_DOWN;
 			}
 		case sf::Keyboard::D:
 			{
-				params.key.evt = Input::D_KEY;
-				return Input::D_KEY;
+				params.key.evt = Input::D_KEY_DOWN;
+				return Input::D_KEY_DOWN;
 			}
 		}
 	}

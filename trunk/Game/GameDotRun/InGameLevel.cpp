@@ -23,7 +23,7 @@ void InGameLevel::Load()
 	player = new Player();
 	player->Initialize();
 	cam.SetAsCurrent();
-	cam.SetToTrack(player);
+	//cam.SetToTrack(player);
 }
 void InGameLevel::Step(float deltaTime)
 {

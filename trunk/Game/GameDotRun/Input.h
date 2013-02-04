@@ -40,11 +40,16 @@ public:
 	typedef void (*InputCallback)(InputParams parameters); 
 	enum Events
 	{
-		ESC_KEY,
-		W_KEY,
-		A_KEY,
-		S_KEY,
-		D_KEY,
+		ESC_KEY_DOWN,
+		W_KEY_DOWN,
+		A_KEY_DOWN,
+		S_KEY_DOWN,
+		D_KEY_DOWN,
+		ESC_KEY_UP,
+		W_KEY_UP,
+		A_KEY_UP,
+		S_KEY_UP,
+		D_KEY_UP,
 		TOTAL_EVENTS,
 		REJECTED
 	};

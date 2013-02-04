@@ -20,7 +20,7 @@ void ApplicationLayer::Run()
 {
 	quit = false;
 	DWORD last = GetTickCount();
-	Input::Get()->Register(Input::ESC_KEY, Quit);
+	Input::Get()->Register(Input::ESC_KEY_DOWN, Quit);
 	while(!quit)
 	{
 		Input::Get()->GetEvents();

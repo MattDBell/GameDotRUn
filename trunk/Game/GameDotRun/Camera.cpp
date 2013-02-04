@@ -3,7 +3,7 @@
 Camera *Camera::currentCamera = 0;
 
 Camera::Camera()
-	:tracking(0), mine(0)
+	:tracking(0), mine(0), offset(0, 0)
 {
 }
 
@@ -36,7 +36,9 @@ void Camera::Update(float dt)
 }
 GDR_Vector2 Camera::defaultTracker(const GDR_Vector2 last, const Entity* tracking, float dt)
 {
-	return tracking->GetPosition();
+	if(tracking)
+		return tracking->GetPosition();
+	return last;
 }
 void Camera::SetAsCurrent()
 {

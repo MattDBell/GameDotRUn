@@ -10,8 +10,19 @@ void Player::InputHandleKeyBoard(Input::InputParams params)
 {
 	switch(params.key.evt)
 	{
-	case Input::D_KEY:
-		playerOne->phys->ApplyForceToCenter(b2Vec2(100, 30));
+	case Input::D_KEY_DOWN:
+		playerOne->movement.SetX(100);
+		break;
+	case Input::A_KEY_DOWN:
+		playerOne->movement.SetX(-100);
+		break;
+	case Input::D_KEY_UP:
+		if(playerOne->movement.GetX() > 0)
+			playerOne->movement.SetX(0);
+		break;
+	case Input::A_KEY_UP:
+		if(playerOne->movement.GetX() < 0)
+			playerOne->movement.SetX(0);
 		break;
 	}
 }
@@ -28,7 +39,7 @@ bool Player::Initialize()
 	graphic->ChangeAnimation(animStart.str);
 	pos.SetX(0);
 	pos.SetY(0);
-
+	movement.Set(0, 0);
 	b2BodyDef bDef;
 	bDef.type = b2_dynamicBody;
 	bDef.userData =(void*)(static_cast<Entity*>(this)); //Just in case we decide to do multiple inheritance :P
@@ -48,10 +59,10 @@ bool Player::Initialize()
 	phys->CreateFixture(&middle, 1.0f);
 
 	playerOne = this;
-	Input::Get()->Register(Input::A_KEY, InputHandleKeyBoard);
-	Input::Get()->Register(Input::D_KEY, InputHandleKeyBoard);
-	Input::Get()->Register(Input::S_KEY, InputHandleKeyBoard);
-	Input::Get()->Register(Input::W_KEY, InputHandleKeyBoard);
+	Input::Get()->Register(Input::A_KEY_DOWN, InputHandleKeyBoard);
+	Input::Get()->Register(Input::D_KEY_DOWN, InputHandleKeyBoard);
+	Input::Get()->Register(Input::A_KEY_UP, InputHandleKeyBoard);
+	Input::Get()->Register(Input::D_KEY_UP, InputHandleKeyBoard);
 	return true;
 }
 bool Player::Alive()
@@ -61,6 +72,7 @@ bool Player::Alive()
 
 bool Player::Update( float deltaTime )
 {
+	phys->ApplyForceToCenter(movement.AsBox());
 	pos.AsBox() = phys->GetPosition();
 	DelayDest(sf::Vector2<float>) posSF = pos.AsSFML();
 	graphic->Draw(posSF);

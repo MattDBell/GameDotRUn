@@ -19,6 +19,7 @@ class GraphicsComponent;
 class Player: public Entity
 {
 	GDR_Vector2 pos;
+	GDR_Vector2 movement;
 	GraphicsComponent * graphic;
 	b2Body * phys;
 	static Player * playerOne;
