@@ -37,15 +37,6 @@ bool Renderer::IsOpen()
 	return window.isOpen();
 }
 
-void Renderer::SizeUp()
-{
-	int newSize = (int)(numComps * 1.25f);
-	GraphicsComponent* newComps = new GraphicsComponent[newSize];
-	memcpy(newComps, components, sizeof(GraphicsComponent) * numComps);
-	delete[] components;
-	components = newComps;
-	numComps = newSize;
-}
 sf::Texture * Renderer::GetTexture(const char * filename)
 {
 	if(textures.count(filename))
@@ -55,7 +46,7 @@ sf::Texture * Renderer::GetTexture(const char * filename)
 	delete actFileName;
 	return &textures[filename];
 }
-GraphicsComponent * Renderer::Create(char * fileName)
+Renderer::GCPool::Handle Renderer::Create(char * fileName)
 {
 	char * actDir = GetDir(fileName);
 	tinyxml2::XMLDocument file;
@@ -66,9 +57,7 @@ GraphicsComponent * Renderer::Create(char * fileName)
 	uint32_t count = 0;
 	for(tinyxml2::XMLElement * child = curr; child; child = child->NextSiblingElement("Animation"))
 		++count;
-	if(lastActive > numComps)
-		SizeUp();
-	GraphicsComponent* comp = &components[lastActive++];
+	Renderer::GCPool::Handle comp = pool.GetNewItem();
 	comp->numAnims = count;
 	comp->anims = new GraphicsComponent::Animation[count];
 	uint32_t index = 0;
@@ -101,17 +90,15 @@ void Renderer::Draw(float deltaTime)
 	Camera::UpdateCurrent(deltaTime);
 	DelayDest(sf::Vector2<float>) camOff = Camera::GetOffset().AsSFML();
 	//Draw all entities;
-	for(uint32_t i = 0; i < lastActive; ++i)
+	auto iter = pool.Begin();
+	while(!iter.End())
 	{
-		components[i].Draw(camOff, &window, deltaTime);
+		iter->Draw(camOff, &window, deltaTime);
+		++iter;
 	}
 	window.display();
 }
 Renderer::Renderer(int width, int height, int numComp )
-	: window(sf::VideoMode(width, height), "SFML Works!"), textures(mapLess)
+	: window(sf::VideoMode(width, height), "SFML Works!"), textures(mapLess), pool(numComp)
 {
-	components = new GraphicsComponent[numComp];
-	this->numComps = numComp;
-	lastActive = 0;
-	
 }

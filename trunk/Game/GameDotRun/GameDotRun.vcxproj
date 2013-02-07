@@ -102,6 +102,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Pool.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="GDRVector2.h" />

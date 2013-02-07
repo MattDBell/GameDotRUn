@@ -10,6 +10,7 @@
 #define GRAPHICS_COMPONENT_H
 #include <SFML\Graphics.hpp>
 #include <stdint.h>
+#include "Pool.h"
 
 class Renderer;
 class GraphicsComponent
@@ -30,6 +31,7 @@ public:
 		AnimFrame * frames;
 	};
 private:
+	friend class Memory::InitDefaultConstructor<GraphicsComponent>;
 	sf::Vector2<float> position;
 	Animation * currAnimation;
 	Animation * anims;

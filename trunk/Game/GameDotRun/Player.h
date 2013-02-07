@@ -13,14 +13,13 @@
 #include "Box2D/Box2D.h"
 #include "GDRVector2.h"
 #include "Input.h"
-
-class GraphicsComponent;
+#include "Renderer.h"
 
 class Player: public Entity
 {
 	GDR_Vector2 pos;
 	GDR_Vector2 movement;
-	GraphicsComponent * graphic;
+	Renderer::GCPool::Handle graphic;
 	b2Body * phys;
 	static Player * playerOne;
 public:

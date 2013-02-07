@@ -12,27 +12,28 @@
 #include <SFML/Graphics.hpp>
 #include <stdint.h>
 #include <map>
-class GraphicsComponent; //Almost want to include this but, may as well avoid pollution
+#include "GraphicsComponent.h"
+#include "Pool.h"
 class Input;
 
 typedef bool (*keycomp)(const char *, const char *);
 
 class Renderer
 {
+public:
+	typedef Memory::Pool<GraphicsComponent, Memory::InitDefaultConstructor> GCPool;
+private:
 	sf::RenderWindow window;
 	static Renderer * renderer;
 	Renderer(int width, int height, int numComp = 100);
-	GraphicsComponent * components;
-	uint32_t numComps;
-	uint32_t lastActive;
+	GCPool pool;
 	std::map<const char *, sf::Texture, keycomp> textures;
-	void SizeUp();
 public:
 	static void initialize(int width, int height, int numComp = 100);
 	static Renderer * Get();
 	bool IsOpen();
 	sf::Texture* GetTexture(const char * filename);
-	GraphicsComponent * Create(char * fileName);
+	GCPool::Handle Create(char * fileName);
 	void Draw(float deltaTime);
 	friend class Input;
 };
