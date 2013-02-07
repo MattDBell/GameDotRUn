@@ -89,6 +89,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +105,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pool.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="GDRVector2.h" />
   </ItemGroup>
