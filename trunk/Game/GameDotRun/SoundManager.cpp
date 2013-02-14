@@ -23,13 +23,37 @@ SoundManager::SoundBufferPool::Handle SoundManager::Load(char * filename)
 	return newBuffer;
 }
 
-SoundManager::SoundPool::Handle SoundManager::Play(SoundManager::SoundBufferPool::Handle sound)
+SoundManager::SoundPool::Handle SoundManager::GetToPlay(SoundManager::SoundBufferPool::Handle sound)
 {
 	auto newSound = instance->sPool.GetNewItem();
 	newSound->setBuffer(*sound);
 	return newSound;
 }
-void SoundManager::Release(SoundPool::Handle sound)
+
+void SoundManager::Release(SoundPool::Handle& sound)
 {
 	instance->sPool.Release(sound);
+}
+bool SoundManager::PlayTilEnd(SoundPool::Handle sound)
+{
+	for(int i = 0; i < MAX_TRACKED; ++i)
+	{
+		if (!instance->playing[i].IsValid())
+		{
+			instance->playing[i] = sound;
+			sound->play();
+			return true;
+		}
+	}
+	return false;
+}
+void SoundManager::Clean()
+{
+	for(int i = 0; i < MAX_TRACKED; ++i)
+	{
+		if(instance->playing[i].IsValid() && instance->playing[i]->getStatus() == sf::Sound::Stopped)
+		{
+			Release(instance->playing[i]);
+		}
+	}
 }

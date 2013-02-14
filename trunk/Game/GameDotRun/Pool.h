@@ -118,7 +118,9 @@ namespace Memory
 		{
 			nodes[h.handle].used = false;
 			nodes[h.handle].nextFree() = nextActive;
-			nextActive = h;
+			nextActive = h.handle;
+			h.handle= 0;
+			h.m_pool = 0;
 		}
 		Iterator Begin()
 		{

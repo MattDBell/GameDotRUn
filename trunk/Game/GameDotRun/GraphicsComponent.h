@@ -43,10 +43,13 @@ private:
 	GraphicsComponent();
 	void SetNumAnims(uint32_t numAnims);
 	friend class Renderer;
+	uint8_t facing;
+
 public:
 	sf::Sprite* GetSprite();
 	void SetAnim(uint32_t slot, Animation &anim);
 	void ChangeAnimation(const char * newAnimState);
 	void Draw(sf::Vector2<float> position, char * newAnimState = 0);
+	void SetFacing(float to);
 };
 #endif

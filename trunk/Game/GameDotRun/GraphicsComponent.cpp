@@ -2,7 +2,7 @@
 #include "Debugging.h"
 GraphicsComponent::GraphicsComponent()
 	:position(0, 0), currAnimation(0), anims(0), numAnims(0),currTime(0.0f), currFrame(0),
-	drawThisFrame(false)
+	drawThisFrame(false),facing(1)
 {
 
 }
@@ -34,6 +34,14 @@ void GraphicsComponent::ChangeAnimation(const char * newAnimState)
 	}
 	DEBUGLOG("Debug", "Failed to find anim state");
 }
+
+void GraphicsComponent::SetFacing(float to)
+{
+	if(to == 0)
+		return;
+	facing = to > 0 ? 1 : -1;
+}
+
 void GraphicsComponent::Draw(sf::Vector2<float> position, char * newAnimState /* = 0 */)
 {
 	if(newAnimState)
@@ -43,6 +51,7 @@ void GraphicsComponent::Draw(sf::Vector2<float> position, char * newAnimState /*
 	this->position = position;
 	drawThisFrame = true;
 }
+
 void GraphicsComponent::Draw(sf::Vector2<float> camPosition, sf::RenderWindow* window, float deltaTime)
 {
 	if(currAnimation)
@@ -72,6 +81,15 @@ void GraphicsComponent::Draw(sf::Vector2<float> camPosition, sf::RenderWindow* w
 	if(!drawThisFrame)
 		return;
 	sf::Sprite & drawing = currAnimation->frames[currFrame].toDraw;
+	if(facing == 0xff ) // -1 int8_t
+	{
+		int width = drawing.getLocalBounds().width;
+		drawing.setTextureRect(sf::IntRect(width, 0,-width, drawing.getLocalBounds().height ));
+	}
+	else
+	{
+		drawing.setTextureRect(sf::IntRect(0, 0, drawing.getLocalBounds().width, drawing.getLocalBounds().height));
+	}
 	drawing.setPosition(position.x - camPosition.x, position.y - camPosition.y);
 	window->draw(drawing);
 	drawThisFrame = false;

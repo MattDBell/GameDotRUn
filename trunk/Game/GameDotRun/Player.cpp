@@ -76,6 +76,8 @@ bool Player::Update( float deltaTime )
 	pos.AsBox() = phys->GetPosition();
 	DelayDest(sf::Vector2<float>) posSF = pos.AsSFML();
 	graphic->Draw(posSF);
+	if(movement.GetX() != 0)
+		graphic->SetFacing(movement.GetX());
 	return true;
 }
 bool Player::Spawn()

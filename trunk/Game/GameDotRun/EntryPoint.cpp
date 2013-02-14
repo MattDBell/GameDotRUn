@@ -5,7 +5,7 @@
 
 int CALLBACK WinMain( HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int /*nCmdShow*/)
 {
-	ApplicationLayer app(200, 200);
+	ApplicationLayer app(640, 480);
 	app.Initialize();
 	app.Run();
 
