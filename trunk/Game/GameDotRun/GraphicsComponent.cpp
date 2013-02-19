@@ -83,12 +83,12 @@ void GraphicsComponent::Draw(sf::Vector2<float> camPosition, sf::RenderWindow* w
 	sf::Sprite & drawing = currAnimation->frames[currFrame].toDraw;
 	if(facing == 0xff ) // -1 int8_t
 	{
-		int width = drawing.getLocalBounds().width;
-		drawing.setTextureRect(sf::IntRect(width, 0,-width, drawing.getLocalBounds().height ));
+		int width = (int)drawing.getLocalBounds().width;
+		drawing.setTextureRect(sf::IntRect(width, 0,-width, (int)drawing.getLocalBounds().height ));
 	}
 	else
 	{
-		drawing.setTextureRect(sf::IntRect(0, 0, drawing.getLocalBounds().width, drawing.getLocalBounds().height));
+		drawing.setTextureRect(sf::IntRect(0, 0, (int)drawing.getLocalBounds().width, (int)drawing.getLocalBounds().height));
 	}
 	drawing.setPosition(position.x - camPosition.x, position.y - camPosition.y);
 	window->draw(drawing);
